@@ -542,6 +542,13 @@
   // Cross-iframe Message Receivers
   // ---
 
+  // SD: general callback function
+  Celery.parentWindowCallback = function(event) {
+  	var handler = "onCelery" + event;
+  	console.log("Callback for " + handler);
+  	if (window.parent[handler]) { window.parent[handler](); }
+  };
+
   // After the overlay iframe's document is ready, we actually show it
   Celery.show = function() {
     this.isShowing = true;
@@ -551,6 +558,8 @@
     // Focus the iframe
     this.$overlayEl.focus();
     this.$overlayEl.css('opacity', '1');
+
+	Celery.parentWindowCallback('Open'); //SD
   };
 
   // Hide and remove the overlay and backdrop
@@ -572,6 +581,7 @@
         this.$backdropEl.remove();
       }.bind(this));
     }
+	Celery.parentWindowCallback('Close'); //SD
   };
 
   // Fired whenever an iframe DOM is ready
@@ -584,6 +594,7 @@
     if (root.ga) {
       root.ga('send', 'pageview', '/celery/' + this.currentItem.slug);
     }
+	Celery.parentWindowCallback('Ready'); //SD - not implemented
   };
 
   // The order was placed
@@ -596,6 +607,7 @@
     if (root.ga) {
       root.ga('send', 'pageview', '/celery/' + this.currentItem.slug + '/placed');
     }
+	Celery.parentWindowCallback('OrderPlaced'); //SD
   };
 
   // The order cancelled
@@ -608,6 +620,7 @@
     if (root.ga) {
       root.ga('send', 'pageview', '/celery/' + this.currentItem.slug + '/cancelled');
     }
+	Celery.parentWindowCallback('OrderCancelled'); //SD - not implemented
   };
 
   // The order failed
@@ -620,6 +633,7 @@
     if (root.ga) {
       root.ga('send', 'pageview', '/celery/' + this.currentItem.slug + '/failed');
     }
+	Celery.parentWindowCallback('OrderFailed'); //SD - not implemented
   };
 
 
@@ -670,6 +684,7 @@
           case 'confirmation':
             var order = message.order;
             $(window).trigger('orderComplete', order);
+            this.placed(); // SD
           break;
           default:
           break;
