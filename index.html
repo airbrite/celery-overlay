@@ -1,0 +1,67 @@
+<html>
+	<head>
+		
+		
+		<!-- <script type='text/javascript' src='/scr/celery-overlay/o.js'></script> -->
+		<script type='text/javascript'>
+			// Celery loader
+			(function() {
+			  'use strict';
+			  if (document.isCeleryLoaded) { return; }
+			  document.isCeleryLoaded = true;
+			  // var p = 'https:' === document.location.protocol ? 'https://' : 'http://';
+			  // var h = 'dpao6ma8eqkx0.cloudfront.net';
+			  // var hn = document.location.hostname;
+			  // if (hn === 'localhost') { h = 'localhost:3333'; } else if (hn === 'dev.trycelery.com') { h = 'dev.trycelery.com:3333'; } else if (hn === 'staging.trycelery.com' || hn === 'dashboard-staging.trycelery.com') { h = 'd37hpp9i5sqgrs.cloudfront.net'; } else if (hn === 'sandbox.trycelery.com' || hn === 'dashboard-sandbox.trycelery.com') { h = 'd3dgd0mlwma3bq.cloudfront.net'; }
+			  // var r = (hn === 'localhost' || hn === 'dev.trycelery.com') ? '/js/o.js?v=' + (new Date()).getTime() : '/assets/o.min.js?v=1395785666285';
+			  var c = document.createElement('script'); c.type = 'text/javascript'; c.async = true;
+			  c.src = '/scr/celery-overlay/o.js'
+			  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(c, s);
+			})();
+		
+		</script>
+		
+	</head>
+	<body>
+		<button data-celery='mytestproduct'>Get To Da Celery!!!</button>
+		<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+
+  var GA_ID = 'UA-3091487-3';
+  ga('create', GA_ID, { 'cookieDomain': 'none' }); // DEV
+  // ga('create', 'UA-3091487-3', 'arsvictor.com'); // PROD
+
+	// Celery callbacks
+	
+	function onCeleryOpen() {
+		console.log("Celery opened!");
+	    ga('send', 'event', 'testpreorder', "opened", "unknown");
+		console.log(ga);
+	}
+	function onCeleryClose() {
+		console.log("Celery closed!");
+	    ga('send', 'event', 'testpreorder', "closed", "unknown");
+	    console.log("shouldve sent a ga event");
+	}
+	function onCeleryReady() { // not implemented
+		console.log("Celery ready!");
+	}
+	function onCeleryOrderPlaced() {
+		console.log("Celery placed!");
+	    ga('send', 'event', 'testpreorder', "placed", "unknown");
+	}
+	function onCeleryOrderCancelled() { // not implemented
+		console.log("Celery cancelled!");
+	}
+	function onCeleryOrderFailed() { // not implemented
+		console.log("Celery failed!");
+	}
+
+
+  </script>
+	</body>
+</html>
